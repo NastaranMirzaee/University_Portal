@@ -1,5 +1,6 @@
 from django.db import models
-from university.educational.models import *
+
+from university.service.models import Department
 
 class Professor(models.Model):
     personnelcode = models.IntegerField(db_column='personnelCode', primary_key=True)  # Field name made lowercase.
@@ -9,12 +10,15 @@ class Professor(models.Model):
     phonenumber = models.CharField(db_column='phoneNumber', max_length=12)  # Field name made lowercase.
     email = models.CharField(max_length=45)
     address = models.CharField(max_length=100, blank=True, null=True)
-    lasteducationcertificate = models.CharField(db_column='lastEducationCertificate', max_length=45)  # Field name made lowercase.
+    # Field name made lowercase.
+    lasteducationcertificate = models.CharField(db_column='lastEducationCertificate', max_length=45)
     gender = models.CharField(max_length=6)
     degree = models.CharField(max_length=45)
     supervisor_flag = models.IntegerField()
-    department_manager_flag = models.IntegerField(db_column='department_ manager_flag')  # Field renamed to remove unsuitable characters.
-    deptno = models.ForeignKey(Department, models.DO_NOTHING, db_column='deptNo', blank=True, null=True)  # Field name made lowercase.
+    # Field renamed to remove unsuitable characters.
+    department_manager_flag = models.IntegerField(db_column='department_ manager_flag')
+    # Field name made lowercase.
+    deptno = models.ForeignKey(Department, models.DO_NOTHING, db_column='deptNo', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -32,7 +36,8 @@ class Student(models.Model):
     gender = models.CharField(max_length=6)
     birthdate = models.DateField(blank=True, null=True)
     nationality = models.CharField(max_length=45, blank=True, null=True)
-    deptno = models.ForeignKey(Department, models.DO_NOTHING, db_column='deptNo', blank=True, null=True)  # Field name made lowercase.
+    # Field name made lowercase.
+    deptno = models.ForeignKey(Department, models.DO_NOTHING, db_column='deptNo', blank=True, null=True)
     supervisor = models.ForeignKey(Professor, models.DO_NOTHING, blank=True, null=True)
     gpa = models.FloatField(blank=True, null=True)
     passed_credit = models.IntegerField(blank=True, null=True)
